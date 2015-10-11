@@ -7,6 +7,8 @@ var getRandomWord = require("./lib/getRandomWord.js");
 var Verb = require("./lib/verb.js");
 var Noun = require("./lib/noun.js");
 var adjective = new Adjective();
+var noun = new Noun();
+var verb = new Verb();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -14,12 +16,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + '/app/'));
-
-var verb = new Verb();
-
-getRandomWord(adjective);
-
-var noun = new Noun();
 
 app.listen(port, function() {
   console.log("server started on port " + port);
@@ -39,4 +35,9 @@ app.get("/noun", function(req, res) {
 
 app.get("/verb", function(req, res) {
   res.json(getRandomWord(verb));
+});
+
+app.post("/adjective", function(req, res) {
+  var word = postWord(req.body.word, adjective);
+  res.json(word);
 });
