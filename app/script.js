@@ -1,3 +1,5 @@
+'use strict';
+
 $(function() {
 
   // JQ selectors for the various form elements
@@ -5,22 +7,22 @@ $(function() {
   var $verb = $('#verb');
   var $noun = $('#noun');
 
-  // Generate name function on "Get random name" button click - grabs a random
+  // Generate name function on 'Get random name' button click - grabs a random
   // adjective, verb, and noun, and sends them to the index.html page
   $('#generateName').click(function() {
     $.get('adjective', function(response) {
       var adjective = response.word;
-      $('#adjective').text(adjective);
+      $adjective.text(adjective);
     });
 
     $.get('verb', function(response) {
       var verb = response.word;
-      $('#verb').text(verb);
+      $verb.text(verb);
     });
 
     $.get('noun', function(response) {
       var noun = response.word;
-      $('#noun').text(noun);
+      $noun.text(noun);
     });
   });
 
@@ -35,7 +37,7 @@ $(function() {
     var noun = $('input[name=noun').val();
     var nouPost;
 
-    if(adjective) {
+    if (adjective) {
       adjPost = {word: adjective};
       $.post('adjective', adjPost, function(response) {
         var adjectiveRes = response.msg;
@@ -43,7 +45,7 @@ $(function() {
       });
     }
 
-    if(verb) {
+    if (verb) {
       verPost = {word: verb};
       $.post('verb', verPost, function(response) {
         var verbRes = response.msg;
@@ -51,7 +53,7 @@ $(function() {
       });
     }
 
-    if(noun) {
+    if (noun) {
       nouPost = {word: noun};
       $.post('noun', nouPost, function(response) {
         var nounRes = response.msg;
